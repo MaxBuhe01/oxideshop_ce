@@ -1071,10 +1071,12 @@ class Article extends \OxidEsales\Eshop\Core\Model\MultiLanguageModel implements
             return $blCanPreview;
         }
 
+        $blUseTimeCheck = Registry::getConfig()->getConfigParam('blUseTimeCheck');
+
         // active ?
         $sNow = date('Y-m-d H:i:s');
         if (
-            !$this->oxarticles__oxactive->value &&
+            !$this->oxarticles__oxactive->value && $blUseTimeCheck
             (
                 $this->oxarticles__oxactivefrom->value > $sNow ||
              $this->oxarticles__oxactiveto->value < $sNow
